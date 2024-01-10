@@ -1,0 +1,15 @@
+{
+  "name": "festivalmusica_cuartapractica",
+  "version": "1.0.0",
+  "description": "Proyecto con SASS y Gulp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "SASS",
+    "Gulp"
+  ],
+  "author": "Joel Johs",
+  "license": "ISC"
+}
