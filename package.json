@@ -1,5 +1,5 @@
 {
-  "name": "festivalmusica_cuartapractica",
+  "name": "festivalmusica_cuarta_practica",
   "version": "1.0.0",
   "description": "Proyecto con SASS y Gulp",
   "main": "index.js",
@@ -11,5 +11,8 @@
     "Gulp"
   ],
   "author": "Joel Johs",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.69.7"
+  }
 }
