@@ -1,5 +1,2 @@
 node_modules/*
-src/*
-gulpfile.js
-src/scss/app.scss
 node_modules/.package-lock.json
