@@ -48,13 +48,21 @@ function versionAvif(done) {
   done();
 }
 
+function javascript(done) {
+  src("src/js/**/*.js").pipe(dest("build/js"));
+
+  done();
+}
+
 function dev(done) {
   watch("src/scss/**/*.scss", css); // Observar los cambios en el archivo SASS
+  watch("src/js/**/*.js", javascript); // Observar los cambios en el archivo js
 
   done();
 }
 
 exports.css = css; // Exportar la funcion para que pueda ser usada en la terminal
+exports.js = javascript; // Exportar la funcion para que pueda ser usada en la terminal
 exports.imagenes = parallel(imagenes, versionWebp, versionAvif); // Exportar la funcion para que pueda ser usada en la terminal
 exports.versionWebp = versionWebp; // Exportar la funcion para que pueda ser usada en la terminal
 exports.versionAvif = versionAvif; // Exportar la funcion para que pueda ser usada en la terminal
