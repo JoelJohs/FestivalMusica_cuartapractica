@@ -3,6 +3,10 @@ const { src, dest, watch, parallel } = require("gulp"); // Importar gulp
 // 📌 CSS
 const sass = require("gulp-sass")(require("sass")); // Importar gulp-sass
 const plumber = require("gulp-plumber"); // Importar gulp-plumber
+const autoprefixer = require("autoprefixer");
+const cssnano = require("cssnano");
+const postcss = require("gulp-postcss");
+const sourcemaps = require("gulp-sourcemaps");
 
 // 📌 Imagenes
 const cache = require("gulp-cache");
@@ -10,14 +14,20 @@ const imagemin = require("gulp-imagemin");
 const webp = require("gulp-webp");
 const avif = require("gulp-avif");
 
+// 📌 Javascript
+const terser = require("gulp-terser-js");
+
 // 📌 Funciones
 function css(done) {
   src("src/scss/**/*.scss") // Identificar el archivo SASS
+    .pipe(sourcemaps.init()) // Inicializar el mapa de codigo
     // Al agregar **/ se busca en todas las carpetas que esten dentro de src/scss
     // y *.scss busca todos los archivos con extension .scss
     // src("/src/scss/app.scss") - De esta manera solo busca el archivo app.scss
     .pipe(plumber()) // Evitar que se detenga la compilacion por errores
     .pipe(sass()) // Compilarlo
+    .pipe(postcss([autoprefixer(), cssnano()])) // Agregarle prefijos y minificarlo
+    .pipe(sourcemaps.write(".")) // Escribir el mapa de codigo
     .pipe(dest("build/css")); // Almacenarla en el disco duro
 
   done(); // callback que avisara a gulp que la tarea ha finalizado
@@ -49,7 +59,11 @@ function versionAvif(done) {
 }
 
 function javascript(done) {
-  src("src/js/**/*.js").pipe(dest("build/js"));
+  src("src/js/**/*.js")
+    .pipe(sourcemaps.init())
+    .pipe(terser())
+    .pipe(sourcemaps.write("."))
+    .pipe(dest("build/js"));
 
   done();
 }
